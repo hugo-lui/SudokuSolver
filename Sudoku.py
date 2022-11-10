@@ -1,9 +1,15 @@
+import copy
+
+answer = []
+
 def valid(grid, r, c, value):
     row = value not in grid[r]
     column = value not in [grid[i][c] for i in range(9)]
     box = value not in [grid[i][j] for i in range(r // 3 * 3, r // 3 * 3 + 3) for j in range(c // 3 * 3, c // 3 * 3 + 3)]
     return row and column and box
+
 def solve(grid, r = 0, c = 0):
+    answer.append(copy.deepcopy(grid))
     if r == 9:
         return True
     elif c == 9:
