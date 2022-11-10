@@ -2,15 +2,8 @@ import tkinter as tk
 import Sudoku as s
 import time
 
-def display():
-    window = tk.Tk()
-    window.title("Sudoku Solver")
-    window.geometry("600x600")
-    canvas = tk.Canvas(window, width = 600, height = 600)
-    canvas.pack()
-    active = True
-    end = 10
-    while active:      
+def display(window, canvas, speed, end):
+    while True:      
         for k in range(len(s.answer)):
             window.update()
             canvas.delete("all")
@@ -28,8 +21,8 @@ def display():
             if k == len(s.answer) - 1:
                 time.sleep(end)
             else:
-                time.sleep(0.01)
-        active = False
+                time.sleep(speed)
+        break
 
 if __name__ == "__main__":
     grid = [[0, 9, 1, 2, 0, 0, 8, 3, 0],
@@ -41,5 +34,12 @@ if __name__ == "__main__":
             [0, 6, 0, 9, 0, 0, 0, 2, 0],
             [0, 0, 2, 3, 0, 0, 0, 0, 4],
             [8, 3, 0, 0, 4, 0, 1, 6, 0]]
+    window = tk.Tk()
+    window.title("Sudoku Solver")
+    window.geometry("600x600")
+    canvas = tk.Canvas(window, width = 600, height = 600)
+    canvas.pack()
+    end = 5
+    speed = 0.05
     s.solve(grid)
-    display()
+    display(window, canvas, speed, end)
